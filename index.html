@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0f14" />
+  <title>LifeOS v3.5.0</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="stylesheet" href="./styles/app.css" />
+</head>
+<body class="wallpaper">
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <div class="title">LifeOS <span class="badge" id="verBadge">v3.5.0</span></div>
+        <div class="sub" id="statusLine">Loading…</div>
+      </div>
+    </div>
+    <div class="row">
+      <span class="pill" id="syncPill">Sync: —</span>
+      <button class="btn" id="btnLock" title="Lock">Lock</button>
+      <button class="btn" id="btnSignOut" title="Sign out">Sign out</button>
+    </div>
+  </div>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="sidehead">
+        <div class="sidebrand">
+          <div class="logo"></div>
+          <div class="sidebrandText">
+            <div class="title">LifeOS</div>
+            <div class="sub" id="sideStatus">Ready</div>
+          </div>
+        </div>
+        <div class="sidebadges">
+          <span class="pill" id="integrityPill">Integrity: —</span>
+          <span class="pill" id="restrictedPill" style="display:none">RESTRICTED</span>
+        </div>
+      </div>
+      <div class="nav">
+        <button class="navbtn" data-route="home"><span class="navicon">🏠</span><span class="navtext">Dashboard</span><span class="navmeta">Overview</span></button>
+        <button class="navbtn" data-route="tasks"><span class="navicon">✅</span><span class="navtext">Tasks</span><span class="navmeta">Create • Edit • Due</span></button>
+        <button class="navbtn" data-route="templates"><span class="navicon">🧩</span><span class="navtext">Templates</span><span class="navmeta">Manager</span></button>
+        <button class="navbtn" data-route="analytics"><span class="navicon">📊</span><span class="navtext">Analytics</span><span class="navmeta">(v2.3)</span></button>
+        <button class="navbtn" data-route="notifications"><span class="navicon">🔔</span><span class="navtext">Notifications</span><span class="navmeta">Center</span></button>
+        <button class="navbtn" data-route="timeline"><span class="navicon">🕘</span><span class="navtext">History</span><span class="navmeta">Audit trail</span></button>
+        <button class="navbtn" data-route="vault"><span class="navicon">🔐</span><span class="navtext">Vault</span><span class="navmeta">Encrypted sync</span></button>
+        <button class="navbtn" data-route="settings"><span class="navicon">⚙️</span><span class="navtext">Settings</span><span class="navmeta">Control Center</span></button>
+      </div>
+      <hr />
+      <div class="small">
+        <div class="mono" id="buildLine"></div>
+      </div>
+    </aside>
+
+    <main class="main" id="view"></main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <div class="modalback hidden" id="authModal">
+    <div class="modal">
+      <h2 id="authTitle">Login</h2>
+      <div class="hint" id="authHint">
+        Bu v2.1: bir nechta qurilmada ishlaydi. Serverga <b>faqat shifrlangan</b> ma'lumot saqlanadi.
+      </div>
+      <hr />
+      <div class="grid">
+        <div>
+          <div class="small">Email</div>
+          <input class="input" id="authEmail" placeholder="you@example.com" />
+        </div>
+        <div>
+          <div class="small">Password (account)</div>
+          <input class="input" id="authPass" type="password" placeholder="Account password" />
+          <div class="small" style="margin-top:6px">Bu parol — Supabase account uchun. Vault key alohida.</div>
+        </div>
+        <div class="row">
+          <button class="btn primary" id="btnLogin">Login</button>
+          <button class="btn" id="btnSignup">Sign up</button>
+        </div>
+      </div>
+      <hr />
+      <div class="grid">
+        <div>
+          <div class="small">Vault Passphrase (Encrypt/Decrypt)</div>
+          <input class="input" id="vaultPass" type="password" placeholder="Strong passphrase" />
+          <div class="small" style="margin-top:6px">
+            <b>Zero-knowledge</b>: bu passphrase serverga yuborilmaydi. Unutsang — data ochilmaydi.
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn warn" id="btnUnlock">Unlock Vault</button>
+          <button class="btn" id="btnCreateVault">Create New Vault</button>
+        </div>
+        <div class="small" id="vaultStateLine">Vault: —</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modalback hidden" id="updateModal">
+    <div class="modal">
+      <h2>Update available</h2>
+      <div class="hint" id="updateNotes">Yangi versiya topildi.</div>
+      <div class="list" id="updateChangelog" style="margin-top:10px;"></div>
+      <hr />
+      <div class="row">
+        <button class="btn primary" id="btnApplyUpdate">Update & Reload</button>
+        <button class="btn" id="btnLaterUpdate">Later</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modalback hidden" id="debugModal">
+    <div class="modal">
+      <h2>Creator Console</h2>
+      <div class="hint">Recent logs (local only). Export to share or archive.</div>
+      <div class="row" style="gap:8px; flex-wrap:wrap; margin-top:10px;">
+        <button class="btn" id="btnExportLogs">Export logs</button>
+        <button class="btn warn" id="btnClearCaches">Clear caches & reload</button>
+        <button class="btn" id="btnCloseDebug">Close</button>
+      </div>
+      <div class="list" id="debugLogList" style="margin-top:12px; max-height:360px; overflow:auto;"></div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{
+  "releases": {
+    "stable": {
+      "version": "3.5.0",
+      "build": 1,
+      "force_min_version": "3.5.0",
+      "notes": "v3.5.0: Documentation + hardening + creator remote feature flags builder",
+      "changelog": [
+        {
+          "version": "3.5.0",
+          "date": "2026-02-08",
+          "notes": "Documentation + hardening + creator remote flags builder"
+        },
+        {
+          "version": "3.4.0",
+          "date": "2026-02-08",
+          "notes": "Sync conflict preview + offline queue + device-specific history"
+        },
+        {
+          "version": "3.3.0",
+          "date": "2026-02-08",
+          "notes": "Sync conflict preview + offline queue + device-specific history"
+        },
+        {
+          "version": "3.2.0",
+          "date": "2026-02-08",
+          "notes": "Creator panel, changelog UI, improved update modal"
+        },
+        {
+          "version": "3.1.0",
+          "date": "2026-02-08",
+          "notes": "Analytics MAX + CSV/PDF export + Streak"
+        },
+        {
+          "version": "3.0.0",
+          "date": "2026-02-08",
+          "notes": "Security presets + export/import signature + rate-limit"
+        }
+      ],
+      "featureFlags": {
+        "advancedRecurring": true,
+        "remoteFeatureFlags": true,
+        "rollbackNav": true,
+        "docsPack": true,
+        "creatorRemoteFlagsBuilder": true
+      },
+      "releasePaths": {
+        "3.4.0": "./",
+        "3.3.0": "./releases/3.3.0/",
+        "3.2.0": "./releases/3.2.0/",
+        "3.5.0": "./"
+      }
+    },
+    "beta": {
+      "version": "3.5.0-beta.1",
+      "build": 1,
+      "force_min_version": "3.5.0",
+      "notes": "v3.5.0-beta.1: Same as stable for now",
+      "changelog": [
+        {
+          "version": "3.2.0",
+          "date": "2026-02-08",
+          "notes": "Beta channel enabled. Use only if you accept experimental changes."
+        }
+      ],
+      "featureFlags": {
+        "advancedRecurring": true,
+        "remoteFeatureFlags": true,
+        "rollbackNav": true
+      },
+      "releasePaths": {
+        "3.4.0": "./",
+        "3.3.0": "./releases/3.3.0/",
+        "3.2.0": "./releases/3.2.0/"
+      }
+    }
+  }
+}
