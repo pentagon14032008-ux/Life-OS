@@ -1287,8 +1287,7 @@ document.getElementById("btnImport")?.addEventListener("click", async ()=>{
   });
 
   refreshDevicesUI();
-});
-  }
+}
 
   // update modal state lines
   els.vaultStateLine.textContent = vaultLocked ? "Vault: Locked" : "Vault: Unlocked";
